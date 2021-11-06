@@ -6,18 +6,23 @@ CC= g++
 #  -Wall turns on most, but not all, compiler warnings
 CXXFLAGS= -std=c++17 -g -Wall
 
-OBJECTS = planet.o 
+OBJECTS = ./planet/planet.o ./population/populationunit.o ./planet/districts/district.o \
+			./planet/buildings/building.o
 HEADERS := $(shell find . -path ./test -prune -o -name "*.hpp" -print)
 
-.PHONEY: main clean build run delds 
+.PHONEY: main clean build run delds
 
 main: main.o $(OBJECTS)
 	$(CC) $(CXXFLAGS) -o ptrack.exe $^
 
 $(OBJECTS): $(HEADERS)
 
-clean: 
-	$(RM) *.o *.gch *.s ptrack.exe
+clean:
+	$(RM) ./planet/*.{o,gch,s,exe}
+	$(RM) ./planet/districts/*.{o,gch,s,exe}
+	$(RM) ./planet/buildings/*.{o,gch,s,exe}
+	$(RM) ./population/*.{o,gch,s,exe}
+	$(RM) *.{o,gch,s,exe}
 
 build: clean main
 
