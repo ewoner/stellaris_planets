@@ -11,17 +11,19 @@ namespace stellaris {
 
 class District {
 public:
-    District();
-    District( District_Types );
     ~District();
     District_Types getType();
     std::string getAttValue(std::string);
     Attributes * getAttributes();
     std::vector<std::string>  * getJobsAddes();
 private:
+    District();
+    District( District_Types );
     District_Types type;
     Attributes * attributes;
     std::vector<std::string> * jobsAdded; //Future Job class
+
+    friend class District_Factory;
 };
 }
 

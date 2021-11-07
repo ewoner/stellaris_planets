@@ -7,7 +7,7 @@ CC= g++
 CXXFLAGS= -std=c++17 -g -Wall
 
 OBJECTS = ./planet/planet.o ./population/populationunit.o ./planet/districts/district.o \
-			./planet/buildings/building.o ./attributes/attributes.o
+			./planet/buildings/building.o ./attributes/attributes.o ./planet/districts/districtfactory.o
 HEADERS := $(shell find . -path ./test -prune -o -name "*.hpp" -print)
 
 .PHONEY: main clean build run delds

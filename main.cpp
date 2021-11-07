@@ -1,10 +1,13 @@
 #include <iostream>
 
 #include "./planet/planet.hpp"
+#include "./planet/districts/district.hpp"
+#include "./planet/districts/districtfactory.hpp"
 
 int main( void ) {
     std::cout << "Main running.....saving.!"  << std::endl;
     stellaris::Planet p;
+    stellaris::District* d = stellaris::dF.cityFactory();
     bool saved = p.saveToFile("test.planet");
     if ( saved ) {
         std::cout<< "..Planet saved. ..";
