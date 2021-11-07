@@ -79,4 +79,92 @@ void Planet::setSlots(int slots ){ this->slots = slots; }
 void Planet::setBuildings(std::vector<Building> * newBuildings ){ this->buildings = buildings; }
 void Planet::setPopulation(std::vector<PopulationUnit> * newPops ) { this->population = newPops; }
 
+bool Planet::loadFromFile( std::string filename ) {
+    bool loaded = false;
+    std::ifstream fin( filename );
+    if ( fin.good() ) {
+        std::string temp;
+        fin >> temp >> name;
+        //fin >> temp >> type;
+        //fin >> temp >> colonyType;
+        fin >> temp >>  habitablity;
+        fin >> temp >>  stability;
+        fin >> temp >>  stabilityBonus;
+        fin >> temp >>  govBonus;
+        fin >> temp >>  crime;
+        fin >> temp >>  housing;
+        fin >> temp >>  amenities;
+        fin >> temp >>  tradeValue;
+        fin >> temp >>  alloys;
+        fin >> temp >>  adminCap;
+        fin >> temp >>  approvalRating;
+        fin >> temp >>  credits;
+        fin >> temp >>  minerals;
+        fin >> temp >>  food;
+        fin >> temp >>  cnsumGoods;
+        fin >> temp >>  unity;
+        fin >> temp >>  motes;
+        fin >> temp >>  exGases;
+        fin >> temp >>  crystals;
+        fin >> temp >>  livingMetal;
+        fin >> temp >>  zro;
+        fin >> temp >>  darkMatter;
+        fin >> temp >>  nanites;
+        fin >> temp >>  physics;
+        fin >> temp >>  society;
+        fin >> temp >>  enginerring;
+        fin >> temp >> size;
+        fin >> temp >> slots;
+        //load districs
+        //load buildings
+        //load pops
+        loaded = true;
+    }
+    fin.close();
+    return loaded;
+}
+
+bool Planet::saveToFile( std::string filename ) {
+    bool saved = false;
+    std::ofstream fout( filename );
+    if ( fout.good() ) {
+        fout << "name               " << name << std::endl;
+        //fin << temp << type;
+        //fin << temp << colonyType;
+        fout << "habitablity        " <<  habitablity << std::endl;
+        fout << "stability          " <<  stability << std::endl;
+        fout << "stability_bonus    " <<  stabilityBonus << std::endl;
+        fout << "gov_bonus          " <<  govBonus << std::endl;
+        fout << "crime              "<<  crime << std::endl;
+        fout << "housing            "<<  housing << std::endl;
+        fout << "amenities          "<<  amenities << std::endl;
+        fout << "trade_value        "<<  tradeValue << std::endl;
+        fout << "alloys             "<<  alloys << std::endl;
+        fout << "admin_cap          "<<  adminCap << std::endl;
+        fout << "approval_rating    "<<  approvalRating << std::endl;
+        fout << "credits            "<<  credits << std::endl;
+        fout << "minerals           "<<  minerals << std::endl;
+        fout << "food               "<<  food << std::endl;
+        fout << "consumer_goods     "<<  cnsumGoods << std::endl;
+        fout << "unity              "<<  unity << std::endl;
+        fout << "motes              "<<  motes << std::endl;
+        fout << "gases              "<<  exGases << std::endl;
+        fout << "crystals           "<<  crystals << std::endl;
+        fout << "livingMetal        "<<  livingMetal << std::endl;
+        fout << "zro                "<<  zro << std::endl;
+        fout << "darkMatter         "<<  darkMatter << std::endl;
+        fout << "nanites            "<<  nanites << std::endl;
+        fout << "physics            "<<  physics << std::endl;
+        fout << "society            "<<  society << std::endl;
+        fout << "enginerring        "<<  enginerring << std::endl;
+        fout << "size               "<< size << std::endl;
+        fout << "slots              "<< slots << std::endl;
+        //load districs
+        //load buildings
+        //load pops
+        saved = true;
+    }
+    fout.close();
+    return saved;
+}
 }

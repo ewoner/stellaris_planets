@@ -1,6 +1,7 @@
 #ifndef PLANET_HPP
 #define PLANET_HPP
 
+#include <fstream>
 #include <string>
 #include <vector>
 
@@ -86,39 +87,42 @@ public:
     void setBuildings(std::vector<Building> * );
     void setPopulation(std::vector<PopulationUnit> *);
 
+    bool loadFromFile( std::string );
+    bool saveToFile( std::string );
+
 private:
     std::string name;
     Planet_Types type;
     Colony_Types colonyType;
-    int habitablity;
-    int stability;
-    float stabilityBonus;
-    float govBonus;
-    int crime;
-    int housing;
-    int amenities;
-    int tradeValue;
-    int alloys;
-    int adminCap;
-    int approvalRating;
-    int credits;
-    int minerals;
-    int food;
-    int cnsumGoods;
-    int unity;
-    int motes;
-    int exGases;
-    int crystals;
-    int livingMetal;
-    int zro;
-    int darkMatter;
-    int nanites;
-    int physics;
-    int society;
-    int enginerring;
-    int size;
+    int habitablity = 0;
+    int stability = 0;
+    float stabilityBonus = 0;
+    float govBonus = 0;
+    int crime = 0;
+    int housing = 0;
+    int amenities = 0;
+    int tradeValue = 0;
+    int alloys = 0;
+    int adminCap = 0;
+    int approvalRating = 0;
+    int credits = 0;
+    int minerals = 0;
+    int food = 0;
+    int cnsumGoods = 0;
+    int unity = 0;
+    int motes = 0;
+    int exGases = 0;
+    int crystals = 0;
+    int livingMetal = 0;
+    int zro = 0;
+    int darkMatter = 0;
+    int nanites = 0;
+    int physics = 0;
+    int society = 0;
+    int enginerring = 0;
+    int size = 0;
     std::vector<District> * districts;
-    int slots;
+    int slots = 0;
     std::vector<Building> * buildings;
     std::vector<PopulationUnit> * population;
 
