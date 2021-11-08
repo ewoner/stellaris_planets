@@ -18,12 +18,8 @@ main: main.o $(OBJECTS)
 $(OBJECTS): $(HEADERS)
 
 clean:
-	$(RM) ./attributes/*.{o,gch,s,exe}
-	$(RM) ./planet/*.{o,gch,s,exe}
-	$(RM) ./planet/districts/*.{o,gch,s,exe}
-	$(RM) ./planet/buildings/*.{o,gch,s,exe}
-	$(RM) ./population/*.{o,gch,s,exe}
-	$(RM) *.{o,gch,s,exe}
+	shopt -s globstar
+	$(RM) ./**/*.{o,gch,s,exe}
 
 build: clean main
 
