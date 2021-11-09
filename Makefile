@@ -1,9 +1,8 @@
 # Thanks to Job Vranish (https://spin.atomicobject.com/2016/08/26/makefile-c-projects/)
-TARGET_EXEC := ptrk.exe
-
-BUILD_DIR := ./Build
-SRC_DIRS := ./Sources
-DATA_DIR := ./Build
+TARGET_EXEC := ptrack.exe
+BUILD_DIR := Build
+SRC_DIRS := Sources
+DATA_DIR := DATA
 EXE := $(BUILD_DIR)/$(TARGET_EXEC)
 
 # Find all the C and C++ files we want to compile
@@ -20,22 +19,22 @@ DEPS := $(OBJS:.o=.d)
 
 # Every folder in ./src will need to be passed to GCC so that it can find header files
 INC_DIRS := $(shell find $(SRC_DIRS) -type d)
-$(echo $(INC_DIRS) > tester.txt )
-$(echo hello > tester.txt )
+
 # Add a prefix to INC_DIRS. So moduleA would become -ImoduleA. GCC understands this -I flag
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 # The -MMD and -MP flags together generate Makefiles for us!
 # These files will have .d instead of .o as the output.
-CPPFLAGS := $(INC_FLAGS) -MMD -MP
+CPPFLAGS := $(INC_FLAGS) -MMD -MP -std=c++17 -g
 
 # The final build step.
 .PHONY: main
-main: $(OBJS)
+main:  $(BUILD_DIR)/$(SRC_DIRS)/main.o $(OBJS)
 	@echo -e "\nCreating...." $(BUILD_DIR)/$(TARGET_EXEC) "\n"
-	$(CXX) $(OBJS) -o $(BUILD_DIR)/$(TARGET_EXEC) $(LDFLAGS)
+	$(CXX) $(OBJS) -o $(BUILD_DIR)/$(TARGET_EXEC) $(LDFLAGS) $(CPPFLAGS)
 	@echo -e "\ncoping data files over...."
-	cp Data/*.* $(DATA_DIR)
+	mkdir -p $(BUILD_DIR)/$(DATA_DIR)
+	cp $(DATA_DIR)/*.* $(BUILD_DIR)/$(DATA_DIR)
 	@echo "Done!!"
 
 #~$(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
@@ -46,7 +45,7 @@ main: $(OBJS)
 
 # Build step for C++ source
 $(BUILD_DIR)/%.o: %.cpp
-	@echo -e "\nCompiling...." $< "\n"
+	@echo -e "\nCompiling...." $@ "\n"
 	mkdir -p $(dir $@)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
@@ -62,7 +61,6 @@ build: clean main
 
 .PHONY: run
 run: main
-	cd Build/
 	$(EXE)
 
 # Include the .d makefiles. The - at the front suppresses the errors of missing
