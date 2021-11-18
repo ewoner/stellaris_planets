@@ -2,7 +2,7 @@
 TARGET_EXEC := ptrack.exe
 BUILD_DIR := Build
 SRC_DIRS := Sources
-DATA_DIR := DATA
+DATA_DIR := Data
 EXE := $(BUILD_DIR)/$(TARGET_EXEC)
 
 # Find all the C and C++ files we want to compile

@@ -1,6 +1,6 @@
-if [ -e ptrack.exe ]
+if [ -e ./Build/ptrack.exe ]
 then
-	./ptrack.exe
+	./Build/ptrack.exe
 else
 	make run
 fi
