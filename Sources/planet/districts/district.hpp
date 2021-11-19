@@ -16,6 +16,9 @@ public:
     std::string getAttValue(std::string);
     Attributes * getAttributes();
     std::vector<std::string>  * getJobsAddes();
+
+//debugging//testing only
+    void setType( District_Types type ) { this->type = type; }
 private:
     District();
     District( District_Types );

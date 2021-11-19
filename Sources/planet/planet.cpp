@@ -7,6 +7,7 @@ Planet::Planet( std::string name, Planet_Types type ) : name ( name ), type( typ
     this->districts = new std::vector<District>{};
     this->buildings = new std::vector<Building>{};
     this->population = new std::vector<PopulationUnit>{};
+    this->colonyType = Colony_Types::colony;
 }
 
 std::string Planet::getName(){ return this->name; }
