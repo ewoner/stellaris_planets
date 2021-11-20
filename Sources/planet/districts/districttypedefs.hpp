@@ -14,7 +14,8 @@ enum class District_Types {
     /*RINGWORLD*/ rw_city, rw_hive, rw_nexus, rw_commercial, rw_generator, rw_research, rw_agricultural, rw_industrial,
     /*HABITATS*/ hb_habitation, hb_trade, hb_leisure, hb_mining, hb_reactor, hb_research, hb_industrial
 };
-
+template<>
+std::string toString( District_Types type );
 
 }//namespace
 #endif
