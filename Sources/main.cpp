@@ -16,7 +16,7 @@ int main( void ) {
     Planet p;
     while ( true ) {
         displayDistricts( p );
-        int result = displayMenu( {"Add City", "Add Factory", "Add Mine", "Add Farm" } );
+        int result = displayMenu( {"Add City", "Add Factory", "Add Mine", "Add Farm" }, true );
         if ( result == 0 ) {
             break;
         }
