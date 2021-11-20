@@ -2,8 +2,8 @@
 <ul>To Do:
   <li>Add Funcionality for Enum Types
     <ul>
-      <li>String to int
-      <li>int to string
+      <li><del>String to int</del>
+        <li><del>int to string</del>
       <li>array[] of strings
     </ul>
   <li>Finish Adding District Factory methods
