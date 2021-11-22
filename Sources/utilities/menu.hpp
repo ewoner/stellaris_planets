@@ -25,12 +25,13 @@
 #ifndef MENU_HPP
 #define MENU_HPP
 
+#include <initializer_list>
 #include <iostream>
 #include <string>
 #include <vector>
 
 
-int displayMenu( std::vector<std::string>, bool exit = false );
-
+int createMenu( std::initializer_list<const char*>, bool exit = false );
+int displayMenu( std::vector<std::string*>&, bool exit = false );
 
 #endif /* MENU_HPP */

@@ -1,2 +1,2 @@
-language = "bash"
-run = ""
+language = "C++"
+run = "bash ./start.sh"

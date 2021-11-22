@@ -25,12 +25,47 @@
 #include "menu.hpp"
 
 
+
+int createMenu( std::initializer_list<const char*> items, bool exit ) {
+    std::vector<std::string*> menuItems{};
+    for ( const char* s : items ) {
+        menuItems.push_back( new std::string{ s } );
+    }
+    return displayMenu( menuItems, exit );
+}
+/* Removed for String* version.  New CreateMenu added to make it as such. and call displayMenu below.
+
 int displayMenu(std::vector<std::string> menuOptions, bool exit ){
     int input = -1;
     std::string temp;
     while ( true ) {
         for ( size_t index = 0; index < menuOptions.size(); index ++) {
             std::cout << ( index + 1 ) << ") " << menuOptions.at( index ) << "\n";
+        }
+        std::cout << "0) ";
+        if ( exit ) {
+            std::cout << "Exit\n-> " << std::flush;
+        }
+        else {
+            std::cout << "Go Back\n-> " << std::flush;
+        }
+        getline( std::cin, temp );
+        try { input = stoi( temp );
+        } catch ( ... ) {}
+        if  ( not ( input < 0 or input > menuOptions.size() ) ) {
+            break;
+        }
+        std::cout << "Unknown reponse.\n";
+    }
+    return input;
+}
+*/
+int displayMenu(std::vector<std::string*>& menuOptions, bool exit ){
+    int input = -1;
+    std::string temp;
+    while ( true ) {
+        for ( size_t index = 0; index < menuOptions.size(); index ++) {
+            std::cout << ( index + 1 ) << ") " << *menuOptions.at( index ) << "\n";
         }
         std::cout << "0) ";
         if ( exit ) {

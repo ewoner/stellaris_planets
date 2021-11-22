@@ -4,7 +4,7 @@ namespace stellaris {
 
 Planet::Planet() : Planet( "TEST", Planet_Types::planet ){}
 Planet::Planet( std::string name, Planet_Types type ) : name ( name ), type( type ){
-    this->districts = new std::vector<District>{};
+    this->districts = new std::vector<District*>{};
     this->buildings = new std::vector<Building>{};
     this->population = new std::vector<PopulationUnit>{};
     this->colonyType = Colony_Types::colony;
@@ -40,7 +40,7 @@ int Planet::getPhysics(){ return this->physics; }
 int Planet::getSociety(){ return this->society; }
 int Planet::getEnginerring(){ return this->enginerring; }
 int Planet::getSize(){ return this->size; }
-std::vector<District> * Planet::getDistricts(){ return this->districts; }
+std::vector<District*> * Planet::getDistricts(){ return this->districts; }
 int Planet::getSlots(){ return this->slots; }
 std::vector<Building> * Planet::getBuildings(){ return this->buildings; }
 std::vector<PopulationUnit> * Planet::getPopulation(){ return this->population; }
@@ -75,7 +75,7 @@ void Planet::setPhysics(int physics){ this->physics = physics; }
 void Planet::setSociety(int society ){ this->society = society; }
 void Planet::setEnginerring(int enginerring){ this->enginerring = enginerring; }
 void Planet::setSize(int size ){ this->size = size; }
-void Planet::setDistricts(std::vector<District> * newDistricts ){this->districts = newDistricts; }
+void Planet::setDistricts(std::vector<District*> * newDistricts ){this->districts = newDistricts; }
 void Planet::setSlots(int slots ){ this->slots = slots; }
 void Planet::setBuildings(std::vector<Building> * newBuildings ){ this->buildings = buildings; }
 void Planet::setPopulation(std::vector<PopulationUnit> * newPops ) { this->population = newPops; }

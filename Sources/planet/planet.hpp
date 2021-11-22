@@ -47,7 +47,7 @@ public:
     int getSociety();
     int getEnginerring();
     int getSize();
-    std::vector<District> * getDistricts();
+    std::vector<District*> * getDistricts();
     int getSlots();
     std::vector<Building> * getBuildings();
     std::vector<PopulationUnit> * getPopulation();
@@ -82,7 +82,7 @@ public:
     void setSociety(int);
     void setEnginerring(int);
     void setSize(int);
-    void setDistricts(std::vector<District> * );
+    void setDistricts(std::vector<District*> * );
     void setSlots(int);
     void setBuildings(std::vector<Building> * );
     void setPopulation(std::vector<PopulationUnit> *);
@@ -121,7 +121,7 @@ private:
     int society = 0;
     int enginerring = 0;
     int size = 0;
-    std::vector<District> * districts;
+    std::vector<District*> * districts;
     int slots = 0;
     std::vector<Building> * buildings;
     std::vector<PopulationUnit> * population;
