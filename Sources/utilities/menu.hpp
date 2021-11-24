@@ -32,6 +32,7 @@
 
 
 int createMenu( std::initializer_list<const char*>, bool exit = false );
+int createMenu( std::vector<std::string*>*, bool exit = false );
 int displayMenu( std::vector<std::string*>&, bool exit = false );
 
 #endif /* MENU_HPP */

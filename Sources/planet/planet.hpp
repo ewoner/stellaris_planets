@@ -90,6 +90,9 @@ public:
     bool loadFromFile( std::string );
     bool saveToFile( std::string );
 
+    bool addDistrict( District* );
+    bool delDistrict( District* );
+
 private:
     std::string name;
     Planet_Types type;

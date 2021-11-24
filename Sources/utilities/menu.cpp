@@ -33,6 +33,9 @@ int createMenu( std::initializer_list<const char*> items, bool exit ) {
     }
     return displayMenu( menuItems, exit );
 }
+int createMenu( std::vector<std::string*>* menuItems, bool exit ){
+    return displayMenu( *menuItems, exit);
+}
 /* Removed for String* version.  New CreateMenu added to make it as such. and call displayMenu below.
 
 int displayMenu(std::vector<std::string> menuOptions, bool exit ){

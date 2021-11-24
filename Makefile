@@ -49,6 +49,11 @@ $(BUILD_DIR)/%.o: %.cpp
 	mkdir -p $(dir $@)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
+%.o: %.cpp
+	@echo -e "\nCompiling...." $@ "\n"
+	mkdir -p $(dir $@)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+
 
 .PHONY: clean
 clean:

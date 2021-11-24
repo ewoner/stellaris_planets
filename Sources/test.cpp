@@ -12,7 +12,7 @@
 int test( void ) {
     std::cout << "Main running.....saving.!"  << std::endl;
     stellaris::Planet p;
-    stellaris::District* d = stellaris::dF.cityFactory();
+    stellaris::District* d = stellaris::DF.cityFactory();
     bool saved = p.saveToFile("Data/test.planet");
     if ( saved ) {
         std::cout<< "..Planet saved. ..";

@@ -18,12 +18,13 @@ public:
     static District* agricultureFactory();
     static District* tradeFactory();
 
-} extern dF;
-
+};
 }
 
 #endif
-
+namespace stellaris {
+extern District_Factory DF;
+}
 //~/*URBAN*/city, industrial, hive, nexus,
     //~/*RESOURCE*/ generator, mining, agriculture, trade,
     //~/*ARCOS*/ arco_residental, arco_foundry, arco_industrial, arco_leisure, arco_sanctuary,

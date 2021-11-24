@@ -8,6 +8,8 @@ Planet::Planet( std::string name, Planet_Types type ) : name ( name ), type( typ
     this->buildings = new std::vector<Building>{};
     this->population = new std::vector<PopulationUnit>{};
     this->colonyType = Colony_Types::colony;
+
+    
 }
 
 std::string Planet::getName(){ return this->name; }
@@ -168,4 +170,19 @@ bool Planet::saveToFile( std::string filename ) {
     fout.close();
     return saved;
 }
-}
+
+bool Planet::addDistrict( District* newDistrict ) { 
+    if ( this->districts->size() >= this->size ) {
+        return false;
+    }
+    else {
+        this->districts->push_back( newDistrict );
+        return true;
+    }
+ }
+
+
+bool Planet::delDistrict( District * delDistrict ) {return false; }
+
+}//namespace
+

@@ -12,31 +12,41 @@
 
 using namespace stellaris;
 
-extern District_Factory df;
-
 void displayDistricts( Planet p );
 std::vector<std::string*>* getTypes( Planet& p );
 
 int main( void ) {
-
+d
     Planet p;
+    p.setSize( 3 );
     while ( true ) {
         displayDistricts( p );
         int result = createMenu( {"Add District", "Remove District" }, true );
         if ( result == 1 ){
             int result2 = createMenu( {"City", "Factory"} );
             if ( result2 == 1 ) {
-                p.getDistricts()->push_back( df.cityFactory() );
+                p.addDistrict( DF.cityFactory() );
             }
             else if ( result2 == 2 ) {
-                p.getDistricts()->push_back( df.industrialFactory() );
+                p.addDistrict( DF.cityFactory() );
             }
         }
         else if ( result == 2 ) {
             std::string * names;
             int size;
-            std::vector<std::string*> * typesNames = getTypes( p );
-            
+            std::string typeToDel;
+            std::vector<std::string*>* types = getTypes( p ) ;
+            int result2 = createMenu( types ) - 1;
+            if ( result2 >= 0 and result2 < types->size() ) {
+                typeToDel = *types->at( result2 );
+            }
+            for ( auto d = p.getDistricts()->begin(); d != p.getDistricts()->end(); d++) {
+                if ( toString( (*d)->getType() ) == typeToDel ) {
+                    std::cout << "Nuking that district!"  << std::endl;
+                    p.getDistricts()->erase( d );
+                    break;
+                }
+            }
         }
         else if ( result == 0 ) {
             break;
@@ -67,7 +77,7 @@ void displayDistricts( Planet p ) {
                 mines ++; break;
         }
     }
-    std::cout << "Cities - " << city << " Factories - " << industrial << " Mines - " << mines << " Farms - " << farms << std::endl;
+    std::cout << "Size = "<< p.getDistricts()->size() << "/" << p.getSize()  <<"--Cities - " << city << " Factories - " << industrial << " Mines - " << mines << " Farms - " << farms << std::endl;
 }
 
 std::vector<std::string*> * getTypes( Planet& p ) {

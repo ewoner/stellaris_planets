@@ -1,2 +1,2 @@
 language = "C++"
-run = "bash ./start.sh"
+run = "make;if [ $? -eq 0 ]; then clear; Build/ptrack.exe; fi"
