@@ -5,6 +5,8 @@
 
 #include "utilities/menu.hpp"
 
+#include "pltracker/planetplaner.hpp"
+
 #include "planet/planet.hpp"
 #include "planet/districts/district.hpp"
 #include "planet/districts/districttypedefs.hpp"
@@ -18,17 +20,20 @@ std::vector<std::string*>* getTypes( Planet& p );
 
 int main( void ) {
     Planet p;
-    p.setSize( 3 );
+    p.setSize( 12 );
     while ( true ) {
         displayDistricts( p );
         int result = createMenu( {"Add District", "Remove District" }, true );
         if ( result == 1 ){
-            int result2 = createMenu( {"City", "Factory"} );
+            int result2 = createMenu( {"City", "Factory","Farm"} );
             if ( result2 == 1 ) {
                 p.addDistrict( DF.cityFactory() );
             }
             else if ( result2 == 2 ) {
-                p.addDistrict( DF.cityFactory() );
+                p.addDistrict( DF.industrialFactory() );                
+            }
+            else if ( result2 == 3 ) {
+                p.addDistrict( DF.agricultureFactory() );
             }
         }
         else if ( result == 2 ) {
@@ -54,6 +59,10 @@ int main( void ) {
         
 
     }
+    p = Planet();
+    p.setSize(10);
+    PlanetPlaner pp;
+    displayDistricts( pp.getPlanet() );
 
     
     return 0;
@@ -65,20 +74,25 @@ void displayDistricts( Planet& p ) {
     int industrial = 0;
     int city = 0;
 
+    int food = 0;
+    int housing = 0;
+    int pop = 0;
+
     for ( auto d :  (p.getDistricts()) ) {
         
         switch ( d->getType() ) {
             case District_Types::agriculture:
-                farms ++; break;
+                farms ++; food += 8; pop += 2; break;
             case District_Types::city:
-                city ++; break;
+                city ++; housing += 5; pop ++;break;
             case District_Types::industrial:
-                industrial ++; break;
+                industrial ++; pop += 2; break;
             case District_Types::mining:
                 mines ++; break;
         }
     }
-    std::cout << "Size = "<< p.getDistricts().size() << "/" << p.getSize()  <<"--Cities - " << city << " Factories - " << industrial << " Mines - " << mines << " Farms - " << farms << std::endl;
+    std::cout << "Size = "<< p.getDistricts().size() << "/" << p.getSize()  <<" --\tCities - " << city << " Factories - " << industrial << " Mines - " << mines << " Farms - " << farms << std::endl;
+    std::cout << "\t\t\t\tPop = " << pop << "   Food = " << food << "   Housing = " << (housing - pop) << "/" << housing << std::endl;
 }
 
 std::vector<std::string*> * getTypes( Planet& p ) {

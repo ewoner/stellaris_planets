@@ -47,7 +47,7 @@ namespace stellaris {
         return d;
     }
     std::shared_ptr<District> District_Factory::miningFactory() {
-        std::shared_ptr<District> d = std::make_shared<District>( District_Types::generator);
+        std::shared_ptr<District> d = std::make_shared<District>( District_Types::mining);
         d->getAttributes()->add( "upkeep", std::to_string( 1 ));
         d->getAttributes()->add( "housing", std::to_string( 2 ));
         d->getJobsAddes()->push_back("Miner");
@@ -55,7 +55,7 @@ namespace stellaris {
         return d;
     }
     std::shared_ptr<District> District_Factory::agricultureFactory() {
-        std::shared_ptr<District> d = std::make_shared<District>( District_Types::generator);
+        std::shared_ptr<District> d = std::make_shared<District>( District_Types::agriculture);
         d->getAttributes()->add( "upkeep", std::to_string( 1 ));
         d->getAttributes()->add( "housing", std::to_string( 2 ));
         d->getJobsAddes()->push_back("Farmer");
@@ -63,7 +63,7 @@ namespace stellaris {
         return d;
     }
     std::shared_ptr<District> District_Factory::tradeFactory() {
-        std::shared_ptr<District> d = std::make_shared<District>(District_Types::generator);
+        std::shared_ptr<District> d = std::make_shared<District>(District_Types::trade);
         d->getAttributes()->add( "upkeep", std::to_string( 1 ));
         d->getAttributes()->add( "housing", std::to_string( 2 ));
         d->getJobsAddes()->push_back("Clerk");
