@@ -1,6 +1,7 @@
 #ifndef DISTRICTFACTORY_HPP
 #define DISTRICTFACTORY_HPP
 
+#include <memory>
 #include <string>
 
 #include "district.hpp"
@@ -9,14 +10,14 @@ namespace stellaris {
 
 class District_Factory {
 public:
-    static District* cityFactory();
-    static District* industrialFactory();
-    static District* hiveFactory();
-    static District* nexusFactory();
-    static District* generatorFactory();
-    static District* miningFactory();
-    static District* agricultureFactory();
-    static District* tradeFactory();
+    static std::shared_ptr<District> cityFactory();
+    static std::shared_ptr<District> industrialFactory();
+    static std::shared_ptr<District> hiveFactory();
+    static std::shared_ptr<District> nexusFactory();
+    static std::shared_ptr<District> generatorFactory();
+    static std::shared_ptr<District> miningFactory();
+    static std::shared_ptr<District> agricultureFactory();
+    static std::shared_ptr<District> tradeFactory();
 
 };
 }

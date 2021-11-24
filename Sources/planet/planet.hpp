@@ -2,6 +2,7 @@
 #define PLANET_HPP
 
 #include <fstream>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -47,7 +48,8 @@ public:
     int getSociety();
     int getEnginerring();
     int getSize();
-    std::vector<District*> * getDistricts();
+    std::vector<std::shared_ptr<District>>& getDistricts();
+    //std::vector<District*> * getDistricts();
     int getSlots();
     std::vector<Building> * getBuildings();
     std::vector<PopulationUnit> * getPopulation();
@@ -82,7 +84,8 @@ public:
     void setSociety(int);
     void setEnginerring(int);
     void setSize(int);
-    void setDistricts(std::vector<District*> * );
+    void setDistricts(std::unique_ptr<std::vector<std::shared_ptr<District>>>& );
+    //void setDistricts(std::vector<District*> * );
     void setSlots(int);
     void setBuildings(std::vector<Building> * );
     void setPopulation(std::vector<PopulationUnit> *);
@@ -90,8 +93,8 @@ public:
     bool loadFromFile( std::string );
     bool saveToFile( std::string );
 
-    bool addDistrict( District* );
-    bool delDistrict( District* );
+    bool addDistrict( std::shared_ptr<District> );
+    bool delDistrict( std::shared_ptr<District> );
 
 private:
     std::string name;
@@ -124,7 +127,10 @@ private:
     int society = 0;
     int enginerring = 0;
     int size = 0;
-    std::vector<District*> * districts;
+
+    std::unique_ptr< std::vector< std::shared_ptr<District> > > districts;   
+    
+    //std::vector<District*> * OLD_districts;
     int slots = 0;
     std::vector<Building> * buildings;
     std::vector<PopulationUnit> * population;

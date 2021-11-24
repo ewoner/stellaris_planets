@@ -12,11 +12,11 @@
 
 using namespace stellaris;
 
-void displayDistricts( Planet p );
+// Helper Function Protytypes
+void displayDistricts( Planet& p );
 std::vector<std::string*>* getTypes( Planet& p );
 
 int main( void ) {
-d
     Planet p;
     p.setSize( 3 );
     while ( true ) {
@@ -40,10 +40,10 @@ d
             if ( result2 >= 0 and result2 < types->size() ) {
                 typeToDel = *types->at( result2 );
             }
-            for ( auto d = p.getDistricts()->begin(); d != p.getDistricts()->end(); d++) {
+            for ( auto d = p.getDistricts().begin(); d != p.getDistricts().end(); d++) {
                 if ( toString( (*d)->getType() ) == typeToDel ) {
                     std::cout << "Nuking that district!"  << std::endl;
-                    p.getDistricts()->erase( d );
+                    p.getDistricts().erase( d );
                     break;
                 }
             }
@@ -59,13 +59,14 @@ d
     return 0;
 }
 
-void displayDistricts( Planet p ) {
+void displayDistricts( Planet& p ) {
     int farms = 0;
     int mines = 0;
     int industrial = 0;
     int city = 0;
 
-    for ( District* d :  *(p.getDistricts()) ) {
+    for ( auto d :  (p.getDistricts()) ) {
+        
         switch ( d->getType() ) {
             case District_Types::agriculture:
                 farms ++; break;
@@ -77,13 +78,13 @@ void displayDistricts( Planet p ) {
                 mines ++; break;
         }
     }
-    std::cout << "Size = "<< p.getDistricts()->size() << "/" << p.getSize()  <<"--Cities - " << city << " Factories - " << industrial << " Mines - " << mines << " Farms - " << farms << std::endl;
+    std::cout << "Size = "<< p.getDistricts().size() << "/" << p.getSize()  <<"--Cities - " << city << " Factories - " << industrial << " Mines - " << mines << " Farms - " << farms << std::endl;
 }
 
 std::vector<std::string*> * getTypes( Planet& p ) {
-    std::vector<District*> *districts = p.getDistricts();
+    auto districts = p.getDistricts();
     std::unordered_set<std::string*> types;
-    for ( District* d : *districts ) {
+    for (auto d : districts ) {
         types.insert(new std::string{ toString( d->getType() ) } );
     }
     return new std::vector<std::string*>{types.begin(),types.end()};

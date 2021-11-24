@@ -1,2 +1,2 @@
 language = "C++"
-run = "make;if [ $? -eq 0 ]; then clear; Build/ptrack.exe; fi"
+run = "clear;make;if [ $? -eq 0 ]; then clear; Build/ptrack.exe; fi"

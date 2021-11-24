@@ -11,6 +11,7 @@ namespace stellaris {
 
 class District {
 public:
+    District( District_Types );
     ~District();
     District_Types getType();
     std::string getAttValue(std::string);
@@ -21,7 +22,7 @@ public:
     void setType( District_Types type ) { this->type = type; }
 private:
     District();
-    District( District_Types );
+    
     District_Types type;
     Attributes * attributes;
     std::vector<std::string> * jobsAdded; //Future Job class

@@ -12,7 +12,7 @@
 int test( void ) {
     std::cout << "Main running.....saving.!"  << std::endl;
     stellaris::Planet p;
-    stellaris::District* d = stellaris::DF.cityFactory();
+    auto d = stellaris::DF.cityFactory();
     bool saved = p.saveToFile("Data/test.planet");
     if ( saved ) {
         std::cout<< "..Planet saved. ..";
@@ -35,10 +35,10 @@ int test( void ) {
     std::cout << toString( p.getType() ) << " " << ord( p.getType() ) << std::endl;
     std::cout << toString( p.getColonyType() ) << " " << ord( p.getColonyType() ) << std::endl;
     auto ds = p.getDistricts();
-    ds->push_back( d );
-    std::cout << toString( ds->at( 0 )->getType() ) << " "  << ord( ds->at(0)->getType() ) << std::endl;
-    ds->at(0)->setType( stellaris::District_Types::industrial);
-    std::cout << toString( ds->at( 0 )->getType() ) << " "  << ord( ds->at(0)->getType() ) << std::endl;
+    ds.push_back( d );
+    std::cout << toString( ds.at( 0 )->getType() ) << " "  << ord( ds.at(0)->getType() ) << std::endl;
+    ds.at(0)->setType( stellaris::District_Types::industrial);
+    std::cout << toString( ds.at( 0 )->getType() ) << " "  << ord( ds.at(0)->getType() ) << std::endl;
 
 
     std::cout << "\n\n" << createMenu( {"Item A", "Item B", "Item C" } );
