@@ -1,11 +1,16 @@
 #ifndef ATTRIBUTES_HPP
 #define ATTRIBUTES_HPP
 
+
+
+#include <memory>
 #include <set>
 #include <string>
 #include <unordered_map>
 
 namespace stellaris {
+
+#define NO_ATTRIBUTE "NULL"
 
 class Attributes {
 public:
@@ -25,7 +30,7 @@ public:
 
 
 private:
-    std::unordered_map< std::string, std::string > * attributes;
+    std::unique_ptr<std::unordered_map< std::string, std::string >> attributes;
 
 };
 

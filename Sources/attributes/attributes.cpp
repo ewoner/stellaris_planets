@@ -3,10 +3,10 @@
 namespace stellaris {
 
     Attributes::Attributes() {
-        this->attributes = new std::unordered_map<std::string, std::string>{};
+        this->attributes = std::make_unique<std::unordered_map<std::string, std::string>>();
     }
     Attributes::~Attributes() {
-        delete this->attributes;
+        
     }
     bool Attributes::has ( std::string attribute ) {
         return this->attributes->count( attribute ) != 0;
@@ -19,7 +19,12 @@ namespace stellaris {
         }
     }
     std::string Attributes::get( std::string attribute ) {
-        return this->attributes->at( attribute );
+        if ( has(attribute) ) {
+            return this->attributes->at( attribute );
+        }
+        else {
+            return NO_ATTRIBUTE;
+        }
     }
     int Attributes::getAsInt( std::string attribute ) {
         try {
