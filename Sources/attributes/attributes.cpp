@@ -9,9 +9,10 @@ namespace stellaris {
         
     }
     bool Attributes::has ( std::string attribute ) {
-        return this->attributes->count( attribute ) != 0;
+        return this->attributes->count( attribute ) > 0;
     }
     void Attributes::set ( std::string attribute, std::string value ) {
+       
         if ( this->has( attribute ) ) {
             this->attributes->at( attribute ) = value;
         } else {
@@ -30,33 +31,29 @@ namespace stellaris {
         try {
             return stoi( this->attributes->at( attribute ) );
         }
-        catch ( std::invalid_argument const&) {
+        catch ( ... ) {
             return 0;
         }
-        catch ( std::out_of_range const& ) {
-            return 0;
-        }
+        
     }
     double Attributes::getAsDouble ( std::string attribute ) {
         try {
             return stod( this->attributes->at( attribute ) );
         }
-        catch ( std::invalid_argument const&) {
+        catch ( ...) {
             return 0;
         }
-        catch ( std::out_of_range const& ) {
-            return 0;
-        }
+        
     }
     bool Attributes::getAsBool( std::string attribute ) {
         bool rv = false;
-        if ( this->attributes->at( attribute ) == "true" ) {
+        if ( has( attribute ) and  this->attributes->at( attribute ) == "true" ) {
             rv = true;
         }
         return rv;
     }
     void Attributes::add( std::string attribute , std::string value ) {
-        this->attributes->emplace( attribute, value );
+        set( attribute, value );
     }
     void Attributes::del( std::string attribute ) {
         this->attributes->erase( attribute );
@@ -69,8 +66,8 @@ namespace stellaris {
     }
     std::set<std::string>* Attributes::getAttributeNames() {
         std::set<std::string> * rv = new std::set<std::string>{};
-        for (auto IT = this->attributes->begin(); IT != this->attributes->end(); IT++ ) {
-            rv->emplace( IT->first );
+        for (auto  iter = this->attributes->begin();  iter != this->attributes->end();  iter++ ) {
+            rv->emplace(  iter->first );
         }
         return rv;
     }

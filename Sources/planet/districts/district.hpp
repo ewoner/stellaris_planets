@@ -6,17 +6,18 @@
 #include <vector>
 
 #include "districttypedefs.hpp"
+
 #include "../../attributes/attributes.hpp"
+#include "../../attributes/hasattributes.hpp"
 
 namespace stellaris {
 
-class District {
+class District : public HasAttributes {
 public:
     District( District_Types );
     ~District();
     District_Types getType();
     std::string getAttValue(std::string);
-    Attributes& getAttributes();
     std::vector<std::string>&  getJobsAddes();
 
 //debugging//testing only
@@ -25,7 +26,6 @@ private:
     District();
     
     District_Types type;
-    std::unique_ptr<Attributes> attributes;
     std::unique_ptr<std::vector<std::string>> jobsAdded;  // Future Job class
 
     friend class District_Factory;

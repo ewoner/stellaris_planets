@@ -9,6 +9,7 @@ namespace stellaris {
 
 class HasAttributes {
 public:
+    HasAttributes();
     Attributes& getAttributes();
     std::string getAttribute(std::string);
     void setAttribute(std::string, std::string);
