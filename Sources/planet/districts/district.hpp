@@ -18,7 +18,7 @@ public:
     ~District();
     District_Types getType();
     std::string getAttValue(std::string);
-    std::vector<std::string>&  getJobsAddes();
+    std::vector<std::string>&  getJobsAdded();
 
 //debugging//testing only
     void setType( District_Types type ) { this->type = type; }

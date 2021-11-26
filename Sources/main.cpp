@@ -70,10 +70,12 @@ int main( void ) {
 
 void displayDistricts( Planet& p ) {
     int farms = 0;
-    int mines = 0;
+    int plants = 0;
     int industrial = 0;
     int city = 0;
 
+    int power = 0;
+    int upkeep = 0;
     int food = 0;
     int housing = 0;
     int pop = 0;
@@ -82,17 +84,17 @@ void displayDistricts( Planet& p ) {
         
         switch ( d->getType() ) {
             case District_Types::agriculture:
-                farms ++; food += 8; pop += 2; break;
+                upkeep ++;farms ++; food += 8; pop += 2; housing +=2; break;
             case District_Types::city:
-                city ++; housing += 5; pop ++;break;
+                upkeep +=2;city ++; housing += 5; pop ++;break;
             case District_Types::industrial:
-                industrial ++; pop += 2; break;
-            case District_Types::mining:
-                mines ++; break;
+                upkeep +=2;industrial ++; pop += 2; housing+=2; break;
+            case District_Types::generator:
+                upkeep ++;plants ++; power+=8;break;
         }
     }
-    std::cout << "Size = "<< p.getDistricts().size() << "/" << p.getSize()  <<" --\tCities - " << city << " Factories - " << industrial << " Mines - " << mines << " Farms - " << farms << std::endl;
-    std::cout << "\t\t\t\tPop = " << pop << "   Food = " << food << "   Housing = " << (housing - pop) << "/" << housing << std::endl;
+    std::cout << "Size = "<< p.getDistricts().size() << "/" << p.getSize()  <<" --\tCities - " << city << " Factories - " << industrial << " Power Planets - " << plants << " Farms - " << farms << std::endl;
+    std::cout << "\t\t\t\tPop = " << pop << "   Food = " << food << "   Power = " << (power - upkeep) << "/"<< power << "   Housing = " << (housing - pop) << "/" << housing << std::endl;
 }
 
 std::vector<std::string*> * getTypes( Planet& p ) {

@@ -11,7 +11,7 @@ namespace stellaris {
     District_Types District::getType() {
         return this->type;
     }
-    std::vector<std::string>& District::getJobsAddes() {
+    std::vector<std::string>& District::getJobsAdded() {
         return *jobsAdded;
     }
 
