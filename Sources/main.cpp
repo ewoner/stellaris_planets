@@ -15,6 +15,7 @@
 using namespace stellaris;
 
 // Helper Function Protytypes
+//void old_displayDistricts( Planet& p );
 void displayDistricts( Planet& p );
 std::vector<std::string*>* getTypes( Planet& p );
 
@@ -25,7 +26,7 @@ int main( void ) {
         displayDistricts( p );
         int result = createMenu( {"Add District", "Remove District" }, true );
         if ( result == 1 ){
-            int result2 = createMenu( {"City", "Factory","Farm"} );
+            int result2 = createMenu( {"City", "Factory","Power Plant","Farm"} );
             if ( result2 == 1 ) {
                 p.addDistrict( DF.cityFactory() );
             }
@@ -33,6 +34,9 @@ int main( void ) {
                 p.addDistrict( DF.industrialFactory() );                
             }
             else if ( result2 == 3 ) {
+                p.addDistrict( DF.generatorFactory() );
+            }
+            else if ( result2 == 4 ) {
                 p.addDistrict( DF.agricultureFactory() );
             }
         }
@@ -45,13 +49,7 @@ int main( void ) {
             if ( result2 >= 0 and result2 < types->size() ) {
                 typeToDel = *types->at( result2 );
             }
-            for ( auto d = p.getDistricts().begin(); d != p.getDistricts().end(); d++) {
-                if ( toString( (*d)->getType() ) == typeToDel ) {
-                    std::cout << "Nuking that district!"  << std::endl;
-                    p.getDistricts().erase( d );
-                    break;
-                }
-            }
+            p.delDistrict( typeToDel );
         }
         else if ( result == 0 ) {
             break;
@@ -68,7 +66,7 @@ int main( void ) {
     return 0;
 }
 
-void displayDistricts( Planet& p ) {
+void old_displayDistricts( Planet& p ) {
     int farms = 0;
     int plants = 0;
     int industrial = 0;
@@ -90,11 +88,34 @@ void displayDistricts( Planet& p ) {
             case District_Types::industrial:
                 upkeep +=2;industrial ++; pop += 2; housing+=2; break;
             case District_Types::generator:
-                upkeep ++;plants ++; power+=8;break;
+                upkeep ++;plants ++; power+=8; housing += 2;pop+=2;break;
         }
     }
     std::cout << "Size = "<< p.getDistricts().size() << "/" << p.getSize()  <<" --\tCities - " << city << " Factories - " << industrial << " Power Planets - " << plants << " Farms - " << farms << std::endl;
     std::cout << "\t\t\t\tPop = " << pop << "   Food = " << food << "   Power = " << (power - upkeep) << "/"<< power << "   Housing = " << (housing - pop) << "/" << housing << std::endl;
+}
+void displayDistricts( Planet& p ) {
+    int farms = 0;
+    int plants = 0;
+    int industrial = 0;
+    int city = 0;
+    int upkeep = 0;
+
+    for ( auto d :  (p.getDistricts()) ) {
+        upkeep += std::stoi( d->getAttribute( "upkeep" ) );
+        switch ( d->getType() ) {
+            case District_Types::agriculture:
+                farms ++;  break;
+            case District_Types::city:
+                city ++; break;
+            case District_Types::industrial:
+                industrial ++; break;
+            case District_Types::generator:
+                plants ++; break;
+        }
+    }
+    std::cout << "Size = "<< p.getDistricts().size() << "/" << p.getSize()  <<" --\tCities - " << city << " Factories - " << industrial << " Power Planets - " << plants << " Farms - " << farms << std::endl;
+    std::cout << "\t\t\t\tPop / Food = " << p.getPopulation() << "/" << p.getFood() << "   Power = " << (p.getCredits() - upkeep) << "/"<< p.getCredits() << "   Housing = " << (p.getHousing() - p.getPopulation()) << "/" << p.getHousing() << std::endl;
 }
 
 std::vector<std::string*> * getTypes( Planet& p ) {

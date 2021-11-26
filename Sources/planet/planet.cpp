@@ -7,7 +7,7 @@ Planet::Planet( std::string name, Planet_Types type ) : name ( name ), type( typ
     this->districts = std::make_unique<std::vector< std::shared_ptr<District>>>();
     //this->OLD_districts = new std::vector<District*>{};
     this->buildings = new std::vector<Building>{};
-    this->population = new std::vector<PopulationUnit>{};
+    //this->population = new std::vector<PopulationUnit>{};
     this->colonyType = Colony_Types::colony;
 
     
@@ -47,7 +47,7 @@ std::vector<std::shared_ptr<District>>& Planet::getDistricts() {return *district
 //std::vector<District*> * Planet::getDistricts(){ return this->OLD_districts; }
 int Planet::getSlots(){ return this->slots; }
 std::vector<Building> * Planet::getBuildings(){ return this->buildings; }
-std::vector<PopulationUnit> * Planet::getPopulation(){ return this->population; }
+int Planet::getPopulation(){ return this->population; }
 
 void Planet::setName(std::string name ){ this->name = name; }
 void Planet::setType(Planet_Types type ){ this->type = type; }
@@ -85,7 +85,7 @@ void Planet::setDistricts(std::unique_ptr<std::vector<std::shared_ptr<District>>
 }//void Planet::setDistricts(std::vector<District*> * newDistricts ){this->OLD_districts = newDistricts; }
 void Planet::setSlots(int slots ){ this->slots = slots; }
 void Planet::setBuildings(std::vector<Building> * newBuildings ){ this->buildings = buildings; }
-void Planet::setPopulation(std::vector<PopulationUnit> * newPops ) { this->population = newPops; }
+void Planet::setPopulation(int newPops ) { this->population = newPops; }
 
 bool Planet::loadFromFile( std::string filename ) {
     bool loaded = false;
@@ -182,12 +182,64 @@ bool Planet::addDistrict( std::shared_ptr<District> newDistrict ) {
     }
     else {
         this->districts->push_back( newDistrict );
-        return true;
     }
+    this->housing += std::stoi( newDistrict->getAttribute("housing") );
+    for (auto job : newDistrict->getJobsAdded() ) {
+        if ( job == "Farmer" ) {
+            food += 4;
+        }
+        else if ( job == "Technician") {
+            credits += 4;
+        }
+        else if ( job == "Clerk" ) {
+            amenities += 4;
+        }
+        else if ( job == "Metallurgist" ) {
+            alloys += 4;
+        }
+        else if ( job == "Artisan" ) {
+            cnsumGoods += 4;
+        }
+        population ++;
+    }
+    return true;
  }
 
 
-bool Planet::delDistrict( std::shared_ptr<District> delDistrict ) {return false; }
+bool Planet::delDistrict( std::string typeToDel ) {
+    bool rv = false;
+    auto iter = districts->begin();
+    auto delDistrict = *iter;
+    for ( ; iter != districts->end(); iter ++ ) {
+        if ( toString( (*iter)->getType() ) == typeToDel ) {
+            delDistrict = *iter;
+            
+            rv = true;
+            housing -= std::stoi( delDistrict->getAttribute("housing" ) );
+            for (auto job : delDistrict->getJobsAdded() ) {
+                if ( job == "Farmer" ) {
+                    food -= 4;
+                }
+                else if ( job == "Technician") {
+                    credits -= 4;
+                }
+                else if ( job == "Clerk" ) {
+                    amenities -= 4;
+                }
+                else if ( job == "Metallurgist" ) {
+                    alloys -= 4;
+                }
+                else if ( job == "Artisan" ) {
+                    cnsumGoods -= 4;
+                }
+                population --;
+            }
+        }
+    }
+    districts->erase( iter );
+    delDistrict->getType();
+    return rv;
+ }
 
 }//namespace
 

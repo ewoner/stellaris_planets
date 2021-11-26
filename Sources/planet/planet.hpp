@@ -52,7 +52,7 @@ public:
     //std::vector<District*> * getDistricts();
     int getSlots();
     std::vector<Building> * getBuildings();
-    std::vector<PopulationUnit> * getPopulation();
+    int getPopulation();
 
     void setName(std::string);
     void setType(Planet_Types);
@@ -88,13 +88,13 @@ public:
     //void setDistricts(std::vector<District*> * );
     void setSlots(int);
     void setBuildings(std::vector<Building> * );
-    void setPopulation(std::vector<PopulationUnit> *);
+    void setPopulation(int);
 
     bool loadFromFile( std::string );
     bool saveToFile( std::string );
 
     bool addDistrict( std::shared_ptr<District> );
-    bool delDistrict( std::shared_ptr<District> );
+    bool delDistrict( std::string );
 
 private:
     std::string name;
@@ -133,7 +133,8 @@ private:
     //std::vector<District*> * OLD_districts;
     int slots = 0;
     std::vector<Building> * buildings;
-    std::vector<PopulationUnit> * population;
+    //std::vector<PopulationUnit> * population;  removed place holder for an integer place holder
+    int population = 0;
 
 
 

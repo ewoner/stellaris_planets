@@ -30,10 +30,7 @@ void PlanetPlaner::plan(){
     #if DEBUG
         std::cerr << "--->plan() -- " << std::endl;
     #endif
-    int pop = 0;
-    int food = 0;
-    int housing = 0;
-    int power = 0;
+    
     int upkeep = 0;
     std::shared_ptr<District> newDistrict;
     #if DEBUG 
@@ -48,19 +45,19 @@ void PlanetPlaner::plan(){
             newDistrict = DF.agricultureFactory();
             
         } else {
-            if ( ( food - pop - 2) <= 0 ) {
+            if ( ( p->getFood() - p->getPopulation() - 2) <= 0 ) {
                 #if DEBUG
                     std::cerr << std::setw(17) <<  "Low food  : ";
                 #endif
                 newDistrict = DF.agricultureFactory();
             }
-            else if ( ( power - upkeep ) <= 0 ) {
+            else if ( ( p->getCredits() - upkeep ) <= 0 ) {
                 #if DEBUG
                     std::cerr << std::setw(17) <<  "Low power  : ";
                 #endif
                 newDistrict = DF.generatorFactory();
             }
-            else if ( ( housing - pop - 2 ) < 0 ) {
+            else if ( ( p->getHousing() - p->getPopulation() - 2 ) < 0 ) {
                 #if DEBUG
                     std::cerr << std::setw(17) << "Low Housing : ";
                 #endif
@@ -74,17 +71,7 @@ void PlanetPlaner::plan(){
             }
         }
         p->addDistrict( newDistrict );
-        housing += std::stoi( newDistrict->getAttribute( "housing" ) );
         upkeep += std::stoi( newDistrict->getAttribute( "upkeep" ) );
-        for ( auto job : newDistrict->getJobsAdded() ) {
-            if ( job == "Farmer" ) {
-                food += 4;
-            }
-            if ( job == "Technician") {
-                power += 4;
-            }
-            pop ++;
-        }
         #if DEBUG
             std::cerr << std::setw(5) << std::to_string(pop) + "-" + std::to_string(housing) << " || " << std::setw(5) << std::left  << std::to_string(pop) + "-" + std::to_string(food) << " || " << std::setw(5) << std::left  << std::to_string(upkeep) + "-" + std::to_string(power) << " : " << std::right;
             std::cerr << "added " << toString( newDistrict->getType() ) << std::endl;
