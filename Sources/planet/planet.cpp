@@ -10,7 +10,7 @@ Planet::Planet( std::string name, Planet_Types type ) : name ( name ), type( typ
     //this->population = new std::vector<PopulationUnit>{};
     this->colonyType = Colony_Types::colony;
 
-    
+
 }
 
 std::string Planet::getName(){ return this->name; }
@@ -81,7 +81,7 @@ void Planet::setEnginerring(int enginerring){ this->enginerring = enginerring; }
 void Planet::setSize(int size ){ this->size = size; }
 void Planet::setDistricts(std::unique_ptr<std::vector<std::shared_ptr<District>>> & newDistricts){
     districts = std::move<>(newDistricts);
-    
+
 }//void Planet::setDistricts(std::vector<District*> * newDistricts ){this->OLD_districts = newDistricts; }
 void Planet::setSlots(int slots ){ this->slots = slots; }
 void Planet::setBuildings(std::vector<Building> * newBuildings ){ this->buildings = buildings; }
@@ -176,7 +176,7 @@ bool Planet::saveToFile( std::string filename ) {
     return saved;
 }
 
-bool Planet::addDistrict( std::shared_ptr<District> newDistrict ) { 
+bool Planet::addDistrict( std::shared_ptr<District> newDistrict ) {
     if ( this->districts->size() >= this->size ) {
         return false;
     }
@@ -211,9 +211,9 @@ bool Planet::delDistrict( std::string typeToDel ) {
     auto iter = districts->begin();
     auto delDistrict = *iter;
     for ( ; iter != districts->end(); iter ++ ) {
-        if ( toString( (*iter)->getType() ) == typeToDel ) {
+        if ( ENUM::enum_name( (*iter)->getType() ) == typeToDel ) {
             delDistrict = *iter;
-            
+
             rv = true;
             housing -= std::stoi( delDistrict->getAttribute("housing" ) );
             for (auto job : delDistrict->getJobsAdded() ) {

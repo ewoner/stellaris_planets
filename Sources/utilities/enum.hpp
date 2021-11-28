@@ -95,7 +95,7 @@
 #  define MAGIC_ENUM_RANGE_MAX 128
 #endif
 
-namespace magic_enum {
+namespace ENUM {
 
 // If need another optional type, define the macro MAGIC_ENUM_USING_ALIAS_OPTIONAL.
 #if defined(MAGIC_ENUM_USING_ALIAS_OPTIONAL)
@@ -843,7 +843,7 @@ std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& o
   using D = std::decay_t<E>;
   using U = underlying_type_t<D>;
 #if defined(MAGIC_ENUM_SUPPORTED) && MAGIC_ENUM_SUPPORTED
-  if (const auto name = magic_enum::enum_name<D>(value); !name.empty()) {
+  if (const auto name = ENUM::enum_name<D>(value); !name.empty()) {
     for (const auto c : name) {
       os.put(c);
     }
@@ -902,7 +902,7 @@ constexpr E& operator^=(E& lhs, E rhs) noexcept {
 namespace flags {
 
 // Returns type name of enum.
-using magic_enum::enum_type_name;
+using ENUM::enum_type_name;
 
 // Returns number of enum-flags values.
 template <typename E>
@@ -1065,7 +1065,7 @@ template <typename E>
 }
 
 // Returns integer value from enum value.
-using magic_enum::enum_integer;
+using ENUM::enum_integer;
 
 // Obtains index in enum-flags values from enum-flags value.
 // Returns optional with index.
@@ -1128,7 +1128,7 @@ std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& o
   using D = std::decay_t<E>;
   using U = underlying_type_t<D>;
 #if defined(MAGIC_ENUM_SUPPORTED) && MAGIC_ENUM_SUPPORTED
-  if (const auto name = magic_enum::flags::enum_name<D>(value); !name.empty()) {
+  if (const auto name = ENUM::flags::enum_name<D>(value); !name.empty()) {
     for (const auto c : name) {
       os.put(c);
     }
@@ -1147,7 +1147,7 @@ std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<Char, Traits>& o
 
 namespace flags::bitwise_operators {
 
-using namespace magic_enum::bitwise_operators;
+using namespace ENUM::bitwise_operators;
 
 } // namespace magic_enum::flags::bitwise_operators
 

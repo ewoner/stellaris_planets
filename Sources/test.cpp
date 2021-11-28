@@ -1,10 +1,11 @@
 #include <iostream>
 
-#include "pltracker/typedefs.hpp"
+//#include "pltracker/typedefs.hpp"
 
 #include "utilities/menu.hpp"
+#include "utilities/enum.hpp"
 
-#include "planet.hpp"
+#include "planet/planet.hpp"
 #include "planet/districts/district.hpp"
 #include "planet/districts/districtfactory.hpp"
 #include "planet/districts/districttypedefs.hpp"
@@ -32,13 +33,13 @@ int test( void ) {
     std::cout << "Done!" << std::endl;
 
     std::cout << "Printing Type Defs: \n";
-    std::cout << toString( p.getType() ) << " " << ord( p.getType() ) << std::endl;
-    std::cout << toString( p.getColonyType() ) << " " << ord( p.getColonyType() ) << std::endl;
+    std::cout << ENUM::enum_name( p.getType() ) << " " << ENUM::enum_integer( p.getType() ) << std::endl;
+    std::cout << ENUM::enum_name( p.getColonyType() ) << " " << ENUM::enum_integer( p.getColonyType() ) << std::endl;
     auto ds = p.getDistricts();
     ds.push_back( d );
-    std::cout << toString( ds.at( 0 )->getType() ) << " "  << ord( ds.at(0)->getType() ) << std::endl;
+    std::cout << ENUM::enum_name( ds.at( 0 )->getType() ) << " "  << ENUM::enum_integer( ds.at(0)->getType() ) << std::endl;
     ds.at(0)->setType( stellaris::District_Types::industrial);
-    std::cout << toString( ds.at( 0 )->getType() ) << " "  << ord( ds.at(0)->getType() ) << std::endl;
+    std::cout << ENUM::enum_name( ds.at( 0 )->getType() ) << " "  << ENUM::enum_integer( ds.at(0)->getType() ) << std::endl;
 
 
     std::cout << "\n\n" << createMenu( {"Item A", "Item B", "Item C" } );

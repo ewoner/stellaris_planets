@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "utilities/menu.hpp"
+#include "utilities/enum.hpp"
 
 #include "pltracker/planetplaner.hpp"
 
@@ -14,7 +15,7 @@
 
 using namespace stellaris;
 
-// Helper Function Protytypes
+//Helper Function Protytypes
 //void old_displayDistricts( Planet& p );
 void displayDistricts( Planet& p );
 std::vector<std::string*>* getTypes( Planet& p );
@@ -31,7 +32,7 @@ int main( void ) {
                 p.addDistrict( DF.cityFactory() );
             }
             else if ( result2 == 2 ) {
-                p.addDistrict( DF.industrialFactory() );                
+                p.addDistrict( DF.industrialFactory() );
             }
             else if ( result2 == 3 ) {
                 p.addDistrict( DF.generatorFactory() );
@@ -54,7 +55,7 @@ int main( void ) {
         else if ( result == 0 ) {
             break;
         }
-        
+
 
     }
     p = Planet();
@@ -62,7 +63,7 @@ int main( void ) {
     PlanetPlaner pp;
     displayDistricts( pp.getPlanet() );
 
-    
+
     return 0;
 }
 
@@ -79,7 +80,7 @@ void old_displayDistricts( Planet& p ) {
     int pop = 0;
 
     for ( auto d :  (p.getDistricts()) ) {
-        
+
         switch ( d->getType() ) {
             case District_Types::agriculture:
                 upkeep ++;farms ++; food += 8; pop += 2; housing +=2; break;
@@ -122,7 +123,7 @@ std::vector<std::string*> * getTypes( Planet& p ) {
     auto districts = p.getDistricts();
     std::unordered_set<std::string*> types;
     for (auto d : districts ) {
-        types.insert(new std::string{ toString( d->getType() ) } );
+        types.insert(new std::string{ ENUM::enum_name( d->getType() ) } );
     }
     return new std::vector<std::string*>{types.begin(),types.end()};
 }

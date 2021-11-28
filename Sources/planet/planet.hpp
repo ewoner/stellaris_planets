@@ -6,10 +6,14 @@
 #include <string>
 #include <vector>
 
+#include "./utilities/enum.hpp"
+#include "planettypedefs.hpp"
+
 #include "buildings/building.hpp"
 #include "districts/district.hpp"
+
 #include "../population/populationunit.hpp"
-#include "planettypedefs.hpp"
+
 
 namespace stellaris {
 
@@ -128,8 +132,8 @@ private:
     int enginerring = 0;
     int size = 0;
 
-    std::unique_ptr< std::vector< std::shared_ptr<District> > > districts;   
-    
+    std::unique_ptr< std::vector< std::shared_ptr<District> > > districts;
+
     //std::vector<District*> * OLD_districts;
     int slots = 0;
     std::vector<Building> * buildings;
