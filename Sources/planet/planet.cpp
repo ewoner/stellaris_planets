@@ -2,7 +2,7 @@
 
 namespace stellaris {
 
-Planet::Planet() : Planet( "TEST", Planet_Types::planet ){}
+Planet::Planet() : Planet( "TEST", Planet_Types::gaia ){}
 Planet::Planet( std::string name, Planet_Types type ) : name ( name ), type( type ){
     this->districts = std::make_unique<std::vector< std::shared_ptr<District>>>();
     //this->OLD_districts = new std::vector<District*>{};
