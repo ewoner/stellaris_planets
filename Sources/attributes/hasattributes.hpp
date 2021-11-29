@@ -9,6 +9,7 @@ namespace stellaris {
 
 class HasAttributes {
 public:
+    using Attributes_ptr = std::unique_ptr<Attributes>;
     HasAttributes();
     Attributes& getAttributes();
     std::string getAttribute(std::string);
@@ -19,7 +20,7 @@ public:
     void copyAttributes(Attributes&);
     
 private:
-    std::unique_ptr<Attributes> attributes;
+    Attributes_ptr attributes;
 };
 
 

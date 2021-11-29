@@ -3,7 +3,7 @@
 
 namespace stellaris {
 
-enum class Strata_Types {   ruler,specialist,worker,slave
+enum class Strata_Types {   ruler,specialist,worker,slave,
                             menial_drone, complex_drone,
                             undesirable, criminal
 };

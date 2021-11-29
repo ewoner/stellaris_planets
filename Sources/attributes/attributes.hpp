@@ -14,23 +14,26 @@ namespace stellaris {
 
 class Attributes {
 public:
+    using Attribute_Type = std::unordered_map< std::string, std::string >;
+    using Attribute_Type_ptr = std::unique_ptr<Attribute_Type>;
+
     Attributes();
     ~Attributes();
-    bool has ( std::string );
-    void set ( std::string, std::string );
-    std::string get( std::string );
-    int getAsInt( std::string );
-    double getAsDouble ( std::string );
-    bool getAsBool( std::string );
-    void add( std::string, std::string );
-    void del( std::string );
+    bool has ( const std::string & );
+    void set ( const std::string &, const std::string & );
+    std::string get( const std::string & );
+    int getAsInt( const std::string & );
+    double getAsDouble ( const std::string & );
+    bool getAsBool( const std::string & );
+    void add( const std::string &, const std::string & );
+    void del( const std::string & );
     void purge();
     int size();
     std::set<std::string> * getAttributeNames();
-
-
+    
 private:
-    std::unique_ptr<std::unordered_map< std::string, std::string >> attributes;
+    Attribute_Type_ptr attributes;
+    //std::unique_ptr<std::unordered_map< std::string, std::string >> attributes;
 
 };
 
