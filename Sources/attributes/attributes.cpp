@@ -8,10 +8,10 @@ namespace stellaris {
     Attributes::~Attributes() {
         
     }
-    bool Attributes::has ( std::string attribute ) {
+    bool Attributes::has ( const std::string & attribute ) {
         return this->attributes->count( attribute ) > 0;
     }
-    void Attributes::set ( std::string attribute, std::string value ) {
+    void Attributes::set ( const std::string & attribute, const std::string & value ) {
        
         if ( this->has( attribute ) ) {
             this->attributes->at( attribute ) = value;
@@ -19,7 +19,7 @@ namespace stellaris {
             this->attributes->emplace( attribute, value );
         }
     }
-    std::string Attributes::get( std::string attribute ) {
+    std::string Attributes::get( const std::string & attribute ) {
         if ( has(attribute) ) {
             return this->attributes->at( attribute );
         }
@@ -27,7 +27,7 @@ namespace stellaris {
             return NO_ATTRIBUTE;
         }
     }
-    int Attributes::getAsInt( std::string attribute ) {
+    int Attributes::getAsInt( const std::string & attribute ) {
         try {
             return stoi( this->attributes->at( attribute ) );
         }
@@ -36,7 +36,7 @@ namespace stellaris {
         }
         
     }
-    double Attributes::getAsDouble ( std::string attribute ) {
+    double Attributes::getAsDouble ( const std::string & attribute ) {
         try {
             return stod( this->attributes->at( attribute ) );
         }
@@ -45,17 +45,17 @@ namespace stellaris {
         }
         
     }
-    bool Attributes::getAsBool( std::string attribute ) {
+    bool Attributes::getAsBool( const std::string & attribute ) {
         bool rv = false;
         if ( has( attribute ) and  this->attributes->at( attribute ) == "true" ) {
             rv = true;
         }
         return rv;
     }
-    void Attributes::add( std::string attribute , std::string value ) {
+    void Attributes::add( const std::string & attribute , const std::string & value ) {
         set( attribute, value );
     }
-    void Attributes::del( std::string attribute ) {
+    void Attributes::del( const std::string & attribute ) {
         this->attributes->erase( attribute );
     }
     void Attributes::purge() {

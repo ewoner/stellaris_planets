@@ -17,8 +17,15 @@
 
 namespace stellaris {
 
+
+
+
+
 class Planet {
 public:
+    using District_ptr = std::shared_ptr<District> ;
+    using DistrictVector = std::vector<District_ptr>;
+    using DistrictVector_ptr = std::unique_ptr<DistrictVector> ;
     Planet();
     Planet(std::string, Planet_Types);
 
@@ -52,7 +59,7 @@ public:
     int getSociety();
     int getEnginerring();
     int getSize();
-    std::vector<std::shared_ptr<District>>& getDistricts();
+    DistrictVector& getDistricts();
     //std::vector<District*> * getDistricts();
     int getSlots();
     std::vector<Building> * getBuildings();
@@ -88,7 +95,7 @@ public:
     void setSociety(int);
     void setEnginerring(int);
     void setSize(int);
-    void setDistricts(std::unique_ptr<std::vector<std::shared_ptr<District>>>& );
+    void setDistricts(DistrictVector_ptr& );
     //void setDistricts(std::vector<District*> * );
     void setSlots(int);
     void setBuildings(std::vector<Building> * );
@@ -132,7 +139,7 @@ private:
     int enginerring = 0;
     int size = 0;
 
-    std::unique_ptr< std::vector< std::shared_ptr<District> > > districts;
+    DistrictVector_ptr districts;
 
     //std::vector<District*> * OLD_districts;
     int slots = 0;

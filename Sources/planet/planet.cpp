@@ -4,7 +4,7 @@ namespace stellaris {
 
 Planet::Planet() : Planet( "TEST", Planet_Types::gaia ){}
 Planet::Planet( std::string name, Planet_Types type ) : name ( name ), type( type ){
-    this->districts = std::make_unique<std::vector< std::shared_ptr<District>>>();
+    this->districts = std::make_unique<DistrictVector>();
     //this->OLD_districts = new std::vector<District*>{};
     this->buildings = new std::vector<Building>{};
     //this->population = new std::vector<PopulationUnit>{};
@@ -79,7 +79,7 @@ void Planet::setPhysics(int physics){ this->physics = physics; }
 void Planet::setSociety(int society ){ this->society = society; }
 void Planet::setEnginerring(int enginerring){ this->enginerring = enginerring; }
 void Planet::setSize(int size ){ this->size = size; }
-void Planet::setDistricts(std::unique_ptr<std::vector<std::shared_ptr<District>>> & newDistricts){
+void Planet::setDistricts(DistrictVector_ptr & newDistricts){
     districts = std::move<>(newDistricts);
 
 }//void Planet::setDistricts(std::vector<District*> * newDistricts ){this->OLD_districts = newDistricts; }
