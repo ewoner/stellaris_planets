@@ -93,7 +93,8 @@ bool Planet::loadFromFile( std::string filename ) {
     if ( fin.good() ) {
         std::string temp;
         fin >> temp >> name;
-        //fin >> temp >> type;
+        fin >> temp >> temp;
+        type = ENUM::enum_cast<Planet_Types>(temp).value();
         //fin >> temp >> colonyType;
         fin >> temp >>  habitablity;
         fin >> temp >>  stability;
@@ -137,7 +138,7 @@ bool Planet::saveToFile( std::string filename ) {
     std::ofstream fout( filename );
     if ( fout.good() ) {
         fout << "name               " << name << std::endl;
-        //fin << temp << type;
+        fout << "type               " << ENUM::enum_name(type) << std::endl;
         //fin << temp << colonyType;
         fout << "habitablity        " <<  habitablity << std::endl;
         fout << "stability          " <<  stability << std::endl;
